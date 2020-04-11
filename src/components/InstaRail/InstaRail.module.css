@@ -1,0 +1,15 @@
+.container {
+  margin-left: -12px;
+  margin-bottom: 1.45rem;
+}
+
+.gridItem {
+  display: inline-block;
+  width: 33.3%;
+  vertical-align: top;
+  padding-left: 12px;
+}
+
+.gatsbyImageWrapper div:first-child {
+  padding-bottom: 100% !important;
+}

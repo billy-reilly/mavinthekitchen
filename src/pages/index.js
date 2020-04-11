@@ -3,6 +3,7 @@ import { Link, useStaticQuery, graphql } from "gatsby"
 
 import Layout from "../components/Layout"
 import SEO from "../components/seo"
+import InstaRail from "../components/InstaRail"
 
 export default function IndexPage() {
   const data = useStaticQuery(graphql`
@@ -46,6 +47,7 @@ export default function IndexPage() {
   return (
     <Layout>
       <SEO title="Home" />
+      <InstaRail />
       <div dangerouslySetInnerHTML={{ __html: aboutContent }} />
       <h2>Recipes</h2>
       <ul>
