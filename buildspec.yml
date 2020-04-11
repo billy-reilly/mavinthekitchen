@@ -11,7 +11,7 @@ phases:
     commands:
       - echo "Building site..."
       - npm run build
-  deploy:
+  post_build:
     commands:
       - echo "Deploying build to S3..."
       - npm run deploy
