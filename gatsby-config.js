@@ -1,8 +1,10 @@
+require("dotenv").config()
+
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    title: `Mav in the Kitchen`,
+    description: `Welcome to my little vegetarian home kitchen, based in SW London.`,
+    siteUrl: process.env.SITE_URL,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -13,18 +15,45 @@ module.exports = {
         path: `${__dirname}/src/images`,
       },
     },
+    {
+      resolve: `gatsby-source-wordpress`,
+      options: {
+        baseUrl: process.env.WORDPRESS_ADDRESS,
+        protocol: process.env.WORDPRESS_PROTOCOL,
+        hostingWPCOM: false,
+        useACF: false,
+      },
+    },
+    {
+      resolve: `gatsby-source-instagram`,
+      options: {
+        username: process.env.INSTA_HANDLE,
+      },
+    },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `gatsby-starter-default`,
-        short_name: `starter`,
+        name: `Mav In The Kitchen`,
+        short_name: `mavinthekitchen`,
         start_url: `/`,
-        background_color: `#663399`,
-        theme_color: `#663399`,
+        // background_color: `#663399`, // TODO ?
+        // theme_color: `#663399`, // TODO ?
         display: `minimal-ui`,
-        icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+        icon: `src/images/logo.jpg`,
+        icon_options: {
+          // For all the options available, please see:
+          // https://developer.mozilla.org/en-US/docs/Web/Manifest
+          // https://w3c.github.io/manifest/#purpose-member
+          purpose: `maskable`,
+        },
+      },
+    },
+    {
+      resolve: `gatsby-plugin-s3`,
+      options: {
+        bucketName: process.env.S3_BUCKET,
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality

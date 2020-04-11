@@ -1,9 +1,9 @@
 {
-  "name": "gatsby-starter-default",
+  "name": "mavinthekitchen",
   "private": true,
-  "description": "A simple starter to get up and developing quickly with Gatsby",
+  "description": "Website for mavinthekitchen",
   "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "Billy Reilly",
   "dependencies": {
     "gatsby": "^2.19.45",
     "gatsby-image": "^2.2.44",
@@ -12,6 +12,8 @@
     "gatsby-plugin-react-helmet": "^3.1.24",
     "gatsby-plugin-sharp": "^2.4.13",
     "gatsby-source-filesystem": "^2.1.56",
+    "gatsby-source-instagram": "^0.7.0",
+    "gatsby-source-wordpress": "^3.2.3",
     "gatsby-transformer-sharp": "^2.3.19",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
@@ -19,6 +21,7 @@
     "react-helmet": "^5.2.1"
   },
   "devDependencies": {
+    "gatsby-plugin-s3": "^0.3.3",
     "prettier": "^1.19.1"
   },
   "keywords": [
@@ -28,6 +31,7 @@
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
+    "deploy": "gatsby-plugin-s3 deploy",
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "start": "npm run develop",
     "serve": "gatsby serve",

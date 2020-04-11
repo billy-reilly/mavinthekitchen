@@ -1,21 +1,63 @@
 import React from "react"
-import { Link } from "gatsby"
+import { Link, useStaticQuery, graphql } from "gatsby"
 
-import Layout from "../components/layout"
-import Image from "../components/image"
+import Layout from "../components/Layout"
 import SEO from "../components/seo"
 
-const IndexPage = () => (
-  <Layout>
-    <SEO title="Home" />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
-    </div>
-    <Link to="/page-2/">Go to page 2</Link>
-  </Layout>
-)
+export default function IndexPage() {
+  const data = useStaticQuery(graphql`
+    query {
+      allWordpressPage(filter: { title: { eq: "About" } }) {
+        edges {
+          node {
+            id
+            content
+          }
+        }
+      }
+      allWordpressPost(
+        filter: { tags: { elemMatch: { name: { eq: "mitk_recipe" } } } }
+        sort: { fields: date }
+      ) {
+        edges {
+          node {
+            id
+            title
+            excerpt
+            content
+            slug
+          }
+        }
+      }
+    }
+  `)
+  const aboutContent = data.allWordpressPage.edges[0].node.content
 
-export default IndexPage
+  const recipes = data.allWordpressPost.edges.map(
+    ({ node: { id, title, excerpt, content, slug } }) => ({
+      id,
+      title,
+      excerpt,
+      content,
+      slug,
+    })
+  )
+
+  return (
+    <Layout>
+      <SEO title="Home" />
+      <div dangerouslySetInnerHTML={{ __html: aboutContent }} />
+      <h2>Recipes</h2>
+      <ul>
+        {recipes.map(recipe => (
+          <li key={recipe.id}>
+            <Link to={`/${recipe.slug}`}>
+              <h3>{recipe.title}</h3>
+            </Link>
+            <div dangerouslySetInnerHTML={{ __html: recipe.excerpt }} />
+          </li>
+        ))}
+      </ul>
+    </Layout>
+  )
+}
