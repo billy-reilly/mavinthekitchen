@@ -1,0 +1,21 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 12
+    commands:
+      - echo "Installing dependencies..."
+      - npm install
+  build:
+    runtime-versions:
+      nodejs: 12
+    commands:
+      - echo "Building site..."
+      - npm run build
+  deploy:
+    runtime-versions:
+      nodejs: 12
+    commands:
+      - echo "Deploying build to S3..."
+      - npm run deploy
